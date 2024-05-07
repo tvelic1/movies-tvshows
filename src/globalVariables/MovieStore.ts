@@ -13,8 +13,7 @@ interface MovieDetails {
   interface IMovieStore {
     selectedMovie: MovieDetails | null;
     setSelectedMovie: (movie: MovieDetails) => void;
-    moviesFromSearch:boolean
-    setFromSearch: (search: boolean) => void;
+    
 
   }
   
@@ -29,8 +28,7 @@ interface MovieDetails {
         set({ selectedMovie: movie });
         localStorage.setItem('selected', JSON.stringify(movie));
       },
-      moviesFromSearch: false,
-      setFromSearch: (fromSearch: boolean) => set({ moviesFromSearch: fromSearch }),
+     
     };
   });
   export default MovieStore;

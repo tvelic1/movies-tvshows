@@ -3,15 +3,17 @@ import '../css/MovieDetails.css';
 import MovieStore from '../globalVariables/MovieStore';
 import { useGenreStore } from '../globalVariables/useGenreStore';
 import {fetchGenres}  from '../fetchData/api';
-
+import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 
 
 function MovieDetails() {
   const { selectedMovie } = MovieStore();
   const { genres, setGenres } = useGenreStore();
-
+const navigate=useNavigate();
   const getGenreNames = (genre_ids: number[]): string[] => {
-    return genre_ids.map(id => genres.find(genres => genres.id === id)?.name || "Unknown");
+    return genre_ids.map(id => genres.find(genres => genres.id === id)?.name || "");
   };
 
 
@@ -35,6 +37,9 @@ function MovieDetails() {
 
   return (
     <div className="movie-details">
+       <button className="back-button" onClick={() => navigate('/')}>
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </button>
         <h1 style={{textAlign:'center'}}>{selectedMovie.title}</h1>
         <div className="movie-info">
             <img src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`} alt={selectedMovie.title} />

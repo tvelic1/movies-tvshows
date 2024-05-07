@@ -7,10 +7,11 @@ import {
   Route,
   Link, useNavigate, NavLink
 } from 'react-router-dom';
-import logo from './logo.svg';
 import '../css/App.css';
 import MovieComponent from './MovieComponent';
 import MovieDetails from './MovieDetails';
+import TVShows from './TVShows';
+import TVshowdetails from './TVshowdetails';
 
 function App() {
   return (
@@ -31,6 +32,10 @@ function App() {
           <Route path="/movies" element={<Home />} />
           <Route path="/" element={<MovieComponent />} />
           <Route path="/details" element={<MovieDetails />} />
+          <Route path="/tvshows" element={<TVShows />} />
+          <Route path="/tvshows/:id" element={<TVshowdetails />} />
+
+
 
         </Routes>
       </div>
