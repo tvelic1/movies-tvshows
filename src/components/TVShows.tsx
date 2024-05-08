@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTVshows,  fetchMovie, fetchSearchMovies, fetchSearchShows} from '../fetchData/api';
+import { fetchTVshows, fetchSearchShows} from '../fetchData/api';
 import { useNavigate } from 'react-router-dom';
 import '../css/MovieFeed.css';
 import useStore from '../globalVariables/useStore';
@@ -51,7 +51,7 @@ const TVShows = () => {
     if (search.length < 3)
       fetchData();
 
-  },[]);
+  },[search.length,setFromSearch,tvshow]);
 
 
   useEffect(() => {
@@ -85,7 +85,7 @@ const TVShows = () => {
     fetchData();
 
 
-  }, [search,setFromSearch])
+  }, [search,setFromSearch,tvshow])
 
   return (<>
 
