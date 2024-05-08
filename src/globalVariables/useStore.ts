@@ -3,7 +3,7 @@ import { create } from 'zustand';
 interface StoreState {
   search: string;
   setSearch: (newSearch: string) => void;
-  moviesFromSearch: boolean
+  moviesOrShowsFromSearch: boolean
   setFromSearch: (search: boolean) => void;
 }
 
@@ -17,8 +17,8 @@ const useStore = create<StoreState>((set) => {
     setSearch: (newSearch: string) => {
       set({ search: newSearch });
       localStorage.setItem('search', newSearch);
-    }, moviesFromSearch: false,
-    setFromSearch: (fromSearch: boolean) => set({ moviesFromSearch: fromSearch }),
+    }, moviesOrShowsFromSearch: false,
+    setFromSearch: (fromSearch: boolean) => set({ moviesOrShowsFromSearch: fromSearch }),
   };
 });
 

@@ -6,6 +6,7 @@ import ShowStore from '../globalVariables/ShowStore';
 import { useGenreStore } from '../globalVariables/useGenreStore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import '../css/TVshowdetails.css'
 
 function TVshowdetails() {
 
@@ -53,7 +54,7 @@ function TVshowdetails() {
 
 
   return (
-    <div className="movie-details">
+    <div className="show-details">
       <button className="back-button" onClick={() => navigate('/')}>
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
@@ -61,7 +62,7 @@ function TVshowdetails() {
         <>
 
           <h1 style={{ textAlign: 'center' }}>{selectedShow?.name}</h1>
-          <div className="movie-info">
+          <div className="show-info">
             <VideoPlayer videoKey={key || ''}></VideoPlayer>
             <p><strong>Overview:</strong> {selectedShow?.overview}</p>
             <p><strong>Genres:</strong> {getGenreNames(selectedShow?.genre_ids).join(', ')}</p>

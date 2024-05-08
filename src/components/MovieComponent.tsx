@@ -4,17 +4,16 @@ import { useNavigate } from 'react-router-dom';
 import '../css/MovieTVShowFeed.css';
 import useStore from '../globalVariables/useStore';
 import MovieStore from '../globalVariables/MovieStore';
-import { IMovie } from '../Interfaces/MovieInterface';
+import { IMovie } from '../interfaces/MovieInterface';
 
 
 
 const MovieComponent = () => {
 
-
   const navigate = useNavigate();
   const [movies, setMovies] = useState<IMovie | null>(null);
   const { setSelectedMovie } = MovieStore();
-  const { moviesFromSearch, setFromSearch } = useStore();
+  const { moviesOrShowsFromSearch, setFromSearch } = useStore();
   const { search, setSearch } = useStore();
 
   useEffect(() => {
@@ -33,7 +32,7 @@ const MovieComponent = () => {
     if (search.length < 3)
       fetchData();
 
-  }, [movies, search.length, setFromSearch]);
+  }, [ search.length, setFromSearch]);
 
 
   useEffect(() => {
@@ -84,12 +83,12 @@ const MovieComponent = () => {
       value={search}
       onChange={e => setSearch(e.target.value)}
     />
-    {!moviesFromSearch && <h3 id='title'>TOP 10 Movies of all time</h3>}
+    {!moviesOrShowsFromSearch && <h3 id='title'>TOP 10 Movies of all time</h3>}
     <div className="movie-feed">
 
 
       {movies && (
-        moviesFromSearch
+        moviesOrShowsFromSearch
           ? movies.results.filter(movie => movie.poster_path).sort((a, b) => b.vote_average - a.vote_average)
           : movies.results.slice(0, 10)
       ).map((movie, index) => (

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/MovieTVShowFeed.css';
 import useStore from '../globalVariables/useStore';
 import ShowStore from '../globalVariables/ShowStore';
-import { ITVShow } from '../Interfaces/TVShowInterface';
+import { ITVShow } from '../interfaces/TVShowInterface';
 
 
 const TVShows = () => {
@@ -13,7 +13,7 @@ const TVShows = () => {
   const navigate = useNavigate();
 
   const [tvshow, setTVShow] = useState<ITVShow | null>(null);
-  const { moviesFromSearch, setFromSearch } = useStore();
+  const { moviesOrShowsFromSearch, setFromSearch } = useStore();
   const { search, setSearch } = useStore();
 
   useEffect(() => {
@@ -42,7 +42,7 @@ const TVShows = () => {
         const storedMovies = localStorage.getItem('topTenShows');
 
         if (storedMovies) {
-          
+
           setTVShow(JSON.parse(storedMovies));
           setFromSearch(false);
           return;
@@ -78,25 +78,25 @@ const TVShows = () => {
       value={search}
       onChange={e => setSearch(e.target.value)}
     />
-    {!moviesFromSearch && <h3 id='title'>TOP 10 TV Shows of all time</h3>}
+    {!moviesOrShowsFromSearch && <h3 id='title'>TOP 10 TV Shows of all time</h3>}
     <div className="movie-feed">
 
 
-      {tvshow && 
-        (moviesFromSearch
+      {tvshow &&
+        (moviesOrShowsFromSearch
           ? tvshow.results.filter(show => show.poster_path).sort((a, b) => b.vote_average - a.vote_average)
           : tvshow.results.slice(0, 10))
-      .map((movie, index) => (
-        <div key={index} className="movie-card"
+          .map((show, index) => (
+            <div key={index} className="movie-card"
 
-          onClick={() => {
-            setSelectedShow(movie); navigate(`/tvshows/${movie.id}`)
-          }} >
+              onClick={() => {
+                setSelectedShow(show); navigate(`/tvshows/${show.id}`)
+              }} >
 
-          <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.name} />
-          <h2 style={{textAlign:'center'}} title={movie.name}>{movie.name}</h2>
-        </div>
-      ))}
+              <img src={`https://image.tmdb.org/t/p/w500${show.poster_path}`} alt={show.name} />
+              <h2 style={{ textAlign: 'center' }} title={show.name}>{show.name}</h2>
+            </div>
+          ))}
     </div>
   </>
   );

@@ -10,35 +10,25 @@
 
 .movie-details:hover {
     transform: translateY(-10px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    box-shadow: 10px 16px 12px rgba(7, 2, 78, 0.2);
 }
+
 .back-button {
     background: none;
     border: none;
     cursor: pointer;
     font-size: 30px;
-    color: blue;
-  }
-  
-  .back-button:focus {
+    color: #007bff;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+}
+
+.back-button:focus {
     outline: none;
-  }
-  
-
-.movie-info {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
 }
 
-.movie-info img {
-    width: 70%; 
-    height: 400px; 
-    border-radius: 15px;
-    transition: transform 0.3s ease;
-    margin-bottom: 30px; 
-}
+
 
 .movie-info img:hover {
     transform: scale(1.03);
@@ -46,19 +36,85 @@
 
 .movie-info p {
     margin: 0;
-    padding: 10px 20px; 
+    padding: 10px 20px;
     color: #333;
+    text-align: justify;
 }
 
 .movie-info p strong {
     color: #000;
 }
 
+.movie-info .genres-rating-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.movie-info .genres {
+    text-align: left;
+}
+
+.movie-info .rating {
+    text-align: right;
+}
+.movie-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: justify;
+}
+
+.movie-media {
+    display: flex;
+    width: 100%; 
+    align-items: center; 
+    justify-content: space-around; 
+}
+
+.movie-media img {
+    width: 50%;
+    height: 400px;
+    border-radius: 15px;
+    transition: transform 0.3s ease;
+}
+
+.movie-stats {
+    width: 40%; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
 @media (max-width: 768px) {
+    .movie-media {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .movie-media img {
+        width: 70%; 
+    }
+
+    .movie-stats {
+        width: 100%; 
+        align-items: center; 
+    }
     .movie-details {
         padding: 10px;
     }
+
     .movie-info {
         padding: 0;
     }
+
+    .back-button {
+        font-size: 20px;
+        top: 10px;
+        left: 10px;
+    }
+
 }
+
+

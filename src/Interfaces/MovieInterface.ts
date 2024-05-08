@@ -5,6 +5,9 @@ export interface MovieDetails {
     genre_ids: number[];
     poster_path: string;
     vote_average: number;
+    vote_count:number;
+    popularity:number;
+    release_date:string;
   }
   
   export interface IMovie {

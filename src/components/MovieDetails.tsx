@@ -15,7 +15,11 @@ function MovieDetails() {
   const getGenreNames = (genre_ids: number[]): string[] => {
     return genre_ids.map(id => genres.find(genres => genres.id === id)?.name || "");
   };
-
+  const fixDate = (date: string) => {
+    const parts = date.split('-');
+    const reversedParts = parts.reverse();
+    return reversedParts.join('.');
+  }
 
   useEffect(() => { //in case of refreshing the page, we could use localStorage in globalVariables, but this is also solution
     const fetchData = async () => {
@@ -42,13 +46,24 @@ function MovieDetails() {
       </button>
       <h1 style={{ textAlign: 'center' }}>{selectedMovie.title}</h1>
       <div className="movie-info">
-        <img src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`} alt={selectedMovie.title} />
+        <div className="movie-media">
+          <img src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`} alt={selectedMovie.title} />
+          <div className="movie-stats">
+            <p><strong>Vote Count:</strong> {selectedMovie.vote_count}</p>
+            <p><strong>Popularity:</strong> {selectedMovie.popularity}</p>
+            <p><strong>Release Date:</strong> {fixDate(selectedMovie.release_date)}</p>
+          </div>
+        </div>
         <p><strong>Overview:</strong> {selectedMovie.overview}</p>
-        <p><strong>Genres:</strong> {getGenreNames(selectedMovie.genre_ids).join(', ')}</p>
-        <p><strong>Rating:</strong> {selectedMovie.vote_average} / 10</p>
+
+        <div className="genres-rating-container">
+          <p className="genres"><strong>Genres:</strong> {getGenreNames(selectedMovie.genre_ids).join(', ')}</p>
+          <p className="rating"><strong>Rating:</strong> {selectedMovie.vote_average} / 10</p>
+        </div>
       </div>
     </div>
   );
+
 }
 
 export default MovieDetails;
