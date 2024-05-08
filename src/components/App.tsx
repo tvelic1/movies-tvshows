@@ -1,38 +1,32 @@
 import React from 'react';
 import useStore from '../globalVariables/useStore';
-
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link, useNavigate, NavLink
+  useNavigate
 } from 'react-router-dom';
 import '../css/App.css';
 import MovieComponent from './MovieComponent';
 import MovieDetails from './MovieDetails';
 import TVShows from './TVShows';
 import TVshowdetails from './TVshowdetails';
+import Navbar from './Navbar';
 
 function App() {
   return (
     <Router>
       <div>
       <nav>
-          <NavLink to="/" style={({ isActive }) => 
-            ({ color: isActive ? 'red' : 'black' })}>
-            Movies
-          </NavLink>
-          <NavLink to="/tvshows" style={({ isActive }) => 
-            ({ color: isActive ? 'red' : 'black' })}>
-            TV Shows
-          </NavLink>
+         
+          <Navbar/>
         </nav>
 
         <Routes>
-          <Route path="/movies" element={<Home />} />
-          <Route path="/" element={<MovieComponent />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/" element={<TVShows />} />
           <Route path="/details" element={<MovieDetails />} />
-          <Route path="/tvshows" element={<TVShows />} />
+          <Route path="/movies" element={<MovieComponent />} />
           <Route path="/tvshows/:id" element={<TVshowdetails />} />
 
 

@@ -7,13 +7,15 @@
 
 #inputSearch {
     width: 50%;
-    max-width: 400px; 
+    max-width: 400px;
     padding: 10px;
     margin: 0 auto;
     display: block;
     border: 2px solid #ccc;
-    border-radius: 4px;
+    border-radius: 9px;
     font-size: 16px;
+    transition: border-color 0.1s, box-shadow 0.5s; 
+    border-color: #000000;
   }
   
   #inputSearch:focus {
@@ -27,7 +29,7 @@
     padding: 15px;
     border-radius: 10px;
     overflow: hidden;
-    background-color: rgb(179, 187, 235);    
+    background-color: rgb(101, 120, 225);    
     cursor: pointer;
     transition: transform 0.3s ease;
     

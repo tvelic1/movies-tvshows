@@ -1,17 +1,9 @@
 import {create} from 'zustand';
-
-
-interface ShowDetails {
-    id: number;
-    name: string;
-    overview: string;
-    genre_ids: number[];
-    vote_average: number;
-  }
+import { TVShowDetails } from '../Interfaces/TVShowInterface';
  
   interface IShowStore {
-    selectedShow: ShowDetails | null;
-    setSelectedShow: (show: ShowDetails) => void;
+    selectedShow: TVShowDetails | null;
+    setSelectedShow: (show: TVShowDetails) => void;
     
 
   }
@@ -23,7 +15,7 @@ interface ShowDetails {
   
     return {
       selectedShow: initialShow,
-      setSelectedShow: (show: ShowDetails) => {
+      setSelectedShow: (show: TVShowDetails) => {
         set({ selectedShow: show });
         localStorage.setItem('selectedVideo', JSON.stringify(show));
       },

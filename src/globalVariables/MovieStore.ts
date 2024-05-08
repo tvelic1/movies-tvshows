@@ -1,14 +1,5 @@
 import {create} from 'zustand';
-
-
-interface MovieDetails {
-    id: number;
-    title: string;
-    overview: string;
-    genre_ids: number[];
-    poster_path: string;
-    vote_average: number;
-  }
+import { MovieDetails } from '../Interfaces/MovieInterface';
  
   interface IMovieStore {
     selectedMovie: MovieDetails | null;

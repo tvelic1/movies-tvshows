@@ -54,10 +54,10 @@ export const fetchSearchShows = async (name: string): Promise<any> => {
     throw error;
   }
 };
-export const fetchSearchVideo = async (name: number): Promise<any> => {
+export const fetchSearchVideo = async (name: string): Promise<any> => {
   try {
     const response = await api.get(`/tv/${name}/videos?language=en-US`);
-    return response.data.results[0].key;
+    return response?.data?.results[0]?.key;
   } catch (error) {
     console.error('Error fetching movie data:', error);
     throw error;

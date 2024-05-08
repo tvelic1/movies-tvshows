@@ -1,10 +1,10 @@
-import {create} from 'zustand';
+import { create } from 'zustand';
 
 interface StoreState {
   search: string;
   setSearch: (newSearch: string) => void;
-  moviesFromSearch:boolean
-    setFromSearch: (search: boolean) => void;
+  moviesFromSearch: boolean
+  setFromSearch: (search: boolean) => void;
 }
 
 

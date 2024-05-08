@@ -1,39 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { fetchMovie, fetchSearchMovies } from '../fetchData/api';
 import { useNavigate } from 'react-router-dom';
-import '../css/MovieFeed.css';
+import '../css/MovieTVShowFeed.css';
 import useStore from '../globalVariables/useStore';
 import MovieStore from '../globalVariables/MovieStore';
-
-interface MovieDetails {
-  id: number;
-  title: string;
-  overview: string;
-  genre_ids: number[];
-  poster_path: string;
-  vote_average: number;
-}
+import { IMovie } from '../Interfaces/MovieInterface';
 
 
-
-interface Movie {
-  results: MovieDetails[];
-}
-
-
-const truncate = (text: string, maxLength: number) => {
-  return text.length > maxLength ? text.substring(0, maxLength - 3) + "..." : text;
-};
 
 const MovieComponent = () => {
 
 
   const navigate = useNavigate();
-
-  const [movies, setMovies] = useState<Movie | null>(null);
-  const { setSelectedMovie} = MovieStore();
-  const { moviesFromSearch,setFromSearch } = useStore();
-
+  const [movies, setMovies] = useState<IMovie | null>(null);
+  const { setSelectedMovie } = MovieStore();
+  const { moviesFromSearch, setFromSearch } = useStore();
   const { search, setSearch } = useStore();
 
   useEffect(() => {
@@ -46,20 +27,24 @@ const MovieComponent = () => {
       } catch (error) {
         console.error('Failed to fetch movie:', error);
       }
-      
+
     };
+
     if (search.length < 3)
       fetchData();
 
-  },[movies,search.length,setFromSearch]);
+  }, [movies, search.length, setFromSearch]);
 
 
   useEffect(() => {
 
     const fetchData = async () => {
-      if (search === '' || search.length < 3) {
+      if (search.length < 3) {
+
         const storedMovies = localStorage.getItem('topTen');
+
         if (storedMovies) {
+
           setMovies(JSON.parse(storedMovies));
           setFromSearch(false);
           return;
@@ -68,12 +53,16 @@ const MovieComponent = () => {
 
       try {
         const movieData = await fetchSearchMovies(search);
+
         if (search.length > 2) {
+
           setMovies(movieData)
           setFromSearch(true);
-           
-             }
-      } catch (error) {
+
+        }
+      }
+      catch (error) {
+
         console.error('Failed to fetch movie:', error);
       }
 
@@ -84,7 +73,7 @@ const MovieComponent = () => {
     fetchData();
 
 
-  }, [search,setFromSearch])
+  }, [search, setFromSearch])
 
   return (<>
 
@@ -98,17 +87,15 @@ const MovieComponent = () => {
     {!moviesFromSearch && <h3 id='title'>TOP 10 Movies of all time</h3>}
     <div className="movie-feed">
 
-     
-      {movies &&  (
-          moviesFromSearch
-            ? movies.results.sort((a, b) => b.vote_average - a.vote_average)
-            : movies.results.slice(0, 10)
-        ).map((movie, index) => (
+
+      {movies && (
+        moviesFromSearch
+          ? movies.results.filter(movie => movie.poster_path).sort((a, b) => b.vote_average - a.vote_average)
+          : movies.results.slice(0, 10)
+      ).map((movie, index) => (
         <div key={index} className="movie-card" onClick={() => { setSelectedMovie(movie); navigate('/details') }}>
-          <h2 title={movie.title}>{truncate(movie.title, 40)}</h2>
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
-          <p title={movie.overview}>{truncate(movie.overview, 100)}</p> 
-          <p>Rating: {movie.vote_average}/10</p>
+          <h2 style={{ textAlign: 'center' }} title={movie.title}>{movie.title}</h2>
         </div>
       ))}
     </div>
