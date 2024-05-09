@@ -5,7 +5,6 @@ import { TVShowDetails } from '../interfaces/TVShowInterface';
     selectedShow: TVShowDetails | null;
     setSelectedShow: (show: TVShowDetails) => void;
     
-
   }
   
   const ShowStore = create<IShowStore>((set) => {

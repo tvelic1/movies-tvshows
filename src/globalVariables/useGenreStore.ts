@@ -6,5 +6,4 @@ export const useGenreStore = create<GenreState>((set) => ({
   setGenres: (newGenres: GenreDetails[]) => 
     set({ genres: newGenres }),
   
-  
 }));

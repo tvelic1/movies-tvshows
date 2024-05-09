@@ -17,9 +17,8 @@ function App() {
   return (
     <Router>
       <div>
-      <nav>
-         
-          <Navbar/>
+        <nav>
+          <Navbar />
         </nav>
 
         <Routes>
@@ -38,20 +37,20 @@ function App() {
 }
 
 function Home() {
-  const navigate=useNavigate();
-  const {search,setSearch} =useStore();
+  const navigate = useNavigate();
+  const { search, setSearch } = useStore();
 
 
   return (
     <div>
       <h1>Welcome to the Home Page</h1>
-      <button onClick={()=>navigate('/')}>Click</button>
+      <button onClick={() => navigate('/')}>Click</button>
       <input
-      type="text"
-      placeholder="Search movies..."
-      value={search}
-      onChange={e => setSearch(e.target.value)}
-    />
+        type="text"
+        placeholder="Search movies..."
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+      />
     </div>
   );
 }

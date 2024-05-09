@@ -4,6 +4,7 @@ export interface GenreDetails {
 }
 
 
+
 export interface GenreState {
     genres: GenreDetails[];
     setGenres: (newGenres: GenreDetails[]) => void;

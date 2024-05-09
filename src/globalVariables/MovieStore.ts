@@ -5,7 +5,6 @@ import { MovieDetails } from '../interfaces/MovieInterface';
     selectedMovie: MovieDetails | null;
     setSelectedMovie: (movie: MovieDetails) => void;
     
-
   }
   
   const MovieStore = create<IMovieStore>((set) => {

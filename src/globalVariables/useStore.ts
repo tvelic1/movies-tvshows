@@ -7,7 +7,6 @@ interface StoreState {
   setFromSearch: (search: boolean) => void;
 }
 
-
 const useStore = create<StoreState>((set) => {
   const initialSearch = localStorage.getItem('search') || '';
   //using local storage, if user refresh page

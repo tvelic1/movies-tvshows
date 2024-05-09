@@ -6,6 +6,7 @@ const api = axios.create({
   }
 });
 
+
 export const fetchMovie = async (): Promise<any> => {
   try {
     const response = await api.get("/movie/top_rated?language=en-US&page=1");

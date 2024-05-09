@@ -8,6 +8,7 @@
     transition: transform 0.3s ease;
 }
 
+
 .show-details:hover {
     transform: translateY(-7px);
     box-shadow: 10px 16px 12px rgba(7, 2, 78, 0.2);

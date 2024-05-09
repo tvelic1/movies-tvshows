@@ -82,7 +82,6 @@ const TVShows = () => {
     {!moviesOrShowsFromSearch && <h3 id='title'>TOP 10 TV Shows of all time</h3>}
     <div className="movie-feed">
 
-
       {tvshow &&
         (moviesOrShowsFromSearch
           ? tvshow.results.filter(show => show.poster_path).sort((a, b) => b.vote_average - a.vote_average)

@@ -52,7 +52,6 @@ function TVshowdetails() {
 
   }, [id, setGenres]);
 
-
   return (
     <div className="show-details">
       <button className="back-button-show" onClick={() => navigate('/')}>

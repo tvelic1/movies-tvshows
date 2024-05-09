@@ -4,6 +4,7 @@ interface IVideoProps {
   videoKey: string;
 }
 
+
 const VideoPlayer: React.FC<IVideoProps> = ({ videoKey}) => {
   const videoUrl = `https://www.youtube-nocookie.com/embed/${videoKey}`;
 

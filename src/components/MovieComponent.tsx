@@ -86,7 +86,6 @@ const MovieComponent = () => {
     {!moviesOrShowsFromSearch && <h3 id='title'>TOP 10 Movies of all time</h3>}
     <div className="movie-feed">
 
-
       {movies && (
         moviesOrShowsFromSearch
           ? movies.results.filter(movie => movie.poster_path).sort((a, b) => b.vote_average - a.vote_average)

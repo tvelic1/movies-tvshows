@@ -55,7 +55,6 @@ function MovieDetails() {
           </div>
         </div>
         <p><strong>Overview:</strong> {selectedMovie.overview}</p>
-
         <div className="genres-rating-container">
           <p className="genres"><strong>Genres:</strong> {getGenreNames(selectedMovie.genre_ids).join(', ')}</p>
           <p className="rating"><strong>Rating:</strong> {selectedMovie.vote_average} / 10</p>

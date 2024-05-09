@@ -24,6 +24,7 @@
     box-shadow: 0 0 10px #9ecaed;
 }
 
+
 .movie-card.recommended {
     border: 1.7px solid #79e74d;
     /* green means that it is recomended - rating>8 */
