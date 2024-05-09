@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchTVshows, fetchSearchShows } from '../fetchData/api';
+import { fetchMoviesOrTvshows, fetchSearch } from '../fetchData/api';
 import { useNavigate } from 'react-router-dom';
 import '../css/MovieTVShowFeed.css';
 import useStore from '../globalVariables/useStore';
@@ -19,11 +19,10 @@ const TVShows = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const showData = await fetchTVshows();
+        const showData = await fetchMoviesOrTvshows('tv');
         setTVShow(showData)
-        //console.log(showData)
         localStorage.setItem('topTenShows', JSON.stringify(showData))
-        setFromSearch(false); // I could use global variable here also but I wanted to show this way
+        setFromSearch(false); 
       } catch (error) {
         console.error('Failed to fetch shows:', error);
       }
@@ -51,7 +50,7 @@ const TVShows = () => {
       }
 
       try {
-        const movieData = await fetchSearchShows(search);
+        const movieData = await fetchSearch(search,'tv');
         if (search.length > 2) {
           setTVShow(movieData)
           setFromSearch(true);

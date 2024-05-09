@@ -17,6 +17,7 @@ function Details({ id, type }: { id: string, type: 'tv' | 'movie' }) {
     const [selectedMovie, setSelectedMovie] = useState<MovieDetails | TVShowDetails | null>(null);
     const [key, setKey] = useState<string>('');
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(true); // Dodano novo stanje za praćenje učitavanja
 
     const fixDate = (date: string) => {
         const parts = date.split('-');
@@ -28,6 +29,7 @@ function Details({ id, type }: { id: string, type: 'tv' | 'movie' }) {
     useEffect(() => {
 
         const fetchData = async () => {
+            setIsLoading(true);
             try { 
                 await fetchFindById(type, id).then(res => { console.log(res); setSelectedMovie(res) }).catch(e=>console.log(e));
 
@@ -47,12 +49,17 @@ function Details({ id, type }: { id: string, type: 'tv' | 'movie' }) {
             } catch (error) {
 
                 console.error('Failed to fetch video key:', error);
+            } finally{
+                setIsLoading(false);
             }
 
         }
         fetchData();
     }, [id, type])
-
+    
+     if(isLoading){
+        return <h2 style={{textAlign:'center'}}>Loading...</h2>; 
+     }
 
 
 
