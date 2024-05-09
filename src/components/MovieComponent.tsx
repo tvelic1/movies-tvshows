@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/MovieTVShowFeed.css';
 import useStore from '../globalVariables/useStore';
 import MovieStore from '../globalVariables/MovieStore';
-import { IMovie } from '../interfacess/MovieInterface';
+import { IMovie } from '../interfaces/MovieInterface';
 
 
 
