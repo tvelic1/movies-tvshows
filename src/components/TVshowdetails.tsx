@@ -55,7 +55,7 @@ function TVshowdetails() {
 
   return (
     <div className="show-details">
-      <button className="back-button" onClick={() => navigate('/')}>
+      <button className="back-button-show" onClick={() => navigate('/')}>
         <FontAwesomeIcon icon={faArrowLeft} />
       </button>
       {error ? (<p>There is no movie with this ID</p>) :
@@ -64,7 +64,7 @@ function TVshowdetails() {
           <h1 style={{ textAlign: 'center' }}>{selectedShow?.name}</h1>
           <div className="show-info">
             <VideoPlayer videoKey={key || ''}></VideoPlayer>
-            <p><strong>Overview:</strong> {selectedShow?.overview}</p>
+            <p style={{marginTop:'10px'}}><strong>Overview:</strong> {selectedShow?.overview}</p>
             <p><strong>Genres:</strong> {getGenreNames(selectedShow?.genre_ids).join(', ')}</p>
             <p><strong>Rating:</strong> {selectedShow?.vote_average} / 10</p>
           </div>

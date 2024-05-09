@@ -1,8 +1,8 @@
 .movie-feed {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); 
-    gap: 20px; 
-    padding: 20px; 
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    padding: 20px;
 }
 
 #inputSearch {
@@ -14,41 +14,56 @@
     border: 2px solid #ccc;
     border-radius: 9px;
     font-size: 16px;
-    transition: border-color 0.1s, box-shadow 0.5s; 
+    transition: border-color 0.1s, box-shadow 0.5s;
     border-color: #000000;
-  }
-  
-  #inputSearch:focus {
+}
+
+#inputSearch:focus {
     outline: none;
     border-color: #77acd7;
     box-shadow: 0 0 10px #9ecaed;
-  }
+}
+
+.movie-card.recommended {
+    border: 1.7px solid #79e74d;
+    /* green means that it is recomended - rating>8 */
+    box-shadow: 1px 3px 7px rgba(76, 175, 80, 0.6);
+}
+
+.movie-card.recommended:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 16px rgba(122, 222, 126, 0.8);
+}
 
 .movie-card {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.57);
     padding: 15px;
     border-radius: 10px;
     overflow: hidden;
-    background-color: rgb(101, 120, 225);    
+    background-color: rgb(101, 120, 225);
     cursor: pointer;
     transition: transform 0.3s ease;
-    
+
 }
-#title{
+
+#title {
     text-align: center;
-    font-size:25px
+    font-size: 25px
 }
 
 .movie-card:hover {
-    transform: scale(1.02); 
-  }
+    transform: scale(1.02);
+    box-shadow: 10px 16px 12px rgba(233, 7, 131, 0.2);
 
-  .movie-card:hover img {
-    transform: scale(1.04);   }
-  
+}
+
+.movie-card:hover img {
+    transform: scale(1.04);
+}
+
 .movie-card img {
-    width: 100%; 
-    height: 300px; 
+    width: 100%;
+    height: 300px;
     border-radius: 8px;
     transition: transform 1s ease-in-out;
 
@@ -57,7 +72,7 @@
 .movie-card h2 {
     font-size: 1.5em;
     margin: 10px 0;
-    color:black
+    color: black
 }
 
 .movie-card p {

@@ -19,12 +19,13 @@ const TVShows = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const movieData = await fetchTVshows();
-        setTVShow(movieData)
-        localStorage.setItem('topTenShows', JSON.stringify(movieData))
+        const showData = await fetchTVshows();
+        setTVShow(showData)
+        console.log(showData)
+        localStorage.setItem('topTenShows', JSON.stringify(showData))
         setFromSearch(false); // I could use global variable here also but I wanted to show this way
       } catch (error) {
-        console.error('Failed to fetch movie:', error);
+        console.error('Failed to fetch shows:', error);
       }
 
     };
@@ -87,7 +88,8 @@ const TVShows = () => {
           ? tvshow.results.filter(show => show.poster_path).sort((a, b) => b.vote_average - a.vote_average)
           : tvshow.results.slice(0, 10))
           .map((show, index) => (
-            <div key={index} className="movie-card"
+            <div key={index}
+              className={`movie-card ${show.vote_average > 8 ? 'recommended' : ''}`}
 
               onClick={() => {
                 setSelectedShow(show); navigate(`/tvshows/${show.id}`)

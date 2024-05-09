@@ -32,7 +32,7 @@ const MovieComponent = () => {
     if (search.length < 3)
       fetchData();
 
-  }, [ search.length, setFromSearch]);
+  }, [search.length, setFromSearch]);
 
 
   useEffect(() => {
@@ -92,7 +92,11 @@ const MovieComponent = () => {
           ? movies.results.filter(movie => movie.poster_path).sort((a, b) => b.vote_average - a.vote_average)
           : movies.results.slice(0, 10)
       ).map((movie, index) => (
-        <div key={index} className="movie-card" onClick={() => { setSelectedMovie(movie); navigate('/details') }}>
+        <div
+          key={index}
+          className={`movie-card ${movie.vote_average > 8 ? 'recommended' : ''}`}
+          onClick={() => { setSelectedMovie(movie); navigate('/details') }}>
+            
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
           <h2 style={{ textAlign: 'center' }} title={movie.title}>{movie.title}</h2>
         </div>

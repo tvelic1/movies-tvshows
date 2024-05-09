@@ -9,11 +9,11 @@
 }
 
 .show-details:hover {
-    transform: translateY(-10px);
+    transform: translateY(-7px);
     box-shadow: 10px 16px 12px rgba(7, 2, 78, 0.2);
 }
 
-.back-button {
+.back-button-show {
     background: none;
     border: none;
     cursor: pointer;
@@ -23,15 +23,17 @@
     top: 20px;
     left: 20px;
 }
-.back-button:focus {
+.back-button-show:focus {
     outline: none;
 }
+
 .show-info p {
     margin: 0;
     padding: 10px 20px;
     color: #030202;
     text-align: justify;
 }
+
 
 .show-info p strong {
     color: #000;

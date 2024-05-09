@@ -36,7 +36,7 @@ function MovieDetails() {
 
 
   if (!selectedMovie) {
-    return <div>No movie selectedd.</div>;
+    return <div>No movie selected.</div>;
   }
 
   return (
