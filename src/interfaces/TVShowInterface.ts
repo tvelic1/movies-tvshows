@@ -1,3 +1,5 @@
+import { GenreDetails } from "./GenreInterface";
+
 export interface TVShowDetails {
     id: number;
     name: string;
@@ -5,6 +7,11 @@ export interface TVShowDetails {
     genre_ids: number[];
     poster_path: string;
     vote_average: number;
+    vote_count:number;
+    popularity:number;
+    release_date:string;
+    title:string;
+    genres:GenreDetails[]
   }
   
   

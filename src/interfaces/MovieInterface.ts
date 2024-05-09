@@ -1,3 +1,5 @@
+import { GenreDetails } from "./GenreInterface";
+
 export interface MovieDetails {
     id: number;
     title: string;
@@ -8,6 +10,8 @@ export interface MovieDetails {
     vote_count:number;
     popularity:number;
     release_date:string;
+    name:string;
+    genres:GenreDetails[]
   }
   
   export interface IMovie {

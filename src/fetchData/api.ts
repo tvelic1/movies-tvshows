@@ -33,7 +33,6 @@ export const fetchSearchMovies = async (name: string): Promise<any> => {
     return response.data;
   } catch (error) {
     console.error('Error fetching movie data:', error);
-    throw error;
   }
 };
 export const fetchTVshows = async (): Promise<any> => {
@@ -42,7 +41,6 @@ export const fetchTVshows = async (): Promise<any> => {
     return response.data;
   } catch (error) {
     console.error('Error fetching movie data:', error);
-    throw error;
   }
 };
 
@@ -52,18 +50,32 @@ export const fetchSearchShows = async (name: string): Promise<any> => {
     return response.data;
   } catch (error) {
     console.error('Error fetching movie data:', error);
-    throw error;
   }
 };
 export const fetchSearchVideo = async (name: string, id:string): Promise<any> => {
   try {
     const response = await api.get(`/${name}/${id}/videos?language=en-US`);
+    if(response)
     return response?.data?.results;
+  return null;
   } catch (error) {
     console.error('Error fetching movie data:', error);
     throw error;
   }
 };
+
+export const fetchFindById = async (name: string, id:string): Promise<any> => {
+  try {
+    const response = await api.get(`/${name}/${id}?language=en-US`);
+    if(response)
+    return response.data
+    return null 
+  } catch (error) {
+    console.error('Error fetching movie data:', error);
+  }
+};
+
+
 
 
 
