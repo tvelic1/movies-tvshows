@@ -3,8 +3,6 @@ export interface GenreDetails {
     id: number
 }
 
-
-
 export interface GenreState {
     genres: GenreDetails[];
     setGenres: (newGenres: GenreDetails[]) => void;
