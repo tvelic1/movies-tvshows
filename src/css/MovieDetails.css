@@ -6,7 +6,8 @@
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
-    
+    font-family: 'Arial', sans-serif;
+
 }
 
 .movie-details:hover {
@@ -33,7 +34,7 @@
 
 
 .movie-info img:hover {
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 .movie-info p {
@@ -41,10 +42,11 @@
     padding: 10px 20px;
     color: #333;
     text-align: justify;
+    line-height: 1.5;
 }
 
 .movie-info p strong {
-    color: #000;
+    color: #0056b3;
 }
 
 .movie-info .genres-rating-container {
@@ -60,6 +62,7 @@
 .movie-info .rating {
     text-align: right;
 }
+
 .movie-info {
     display: flex;
     flex-direction: column;
@@ -69,21 +72,21 @@
 
 .movie-media {
     display: flex;
-    width: 100%; 
-    align-items: center; 
-    justify-content: space-around; 
+    width: 100%;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .movie-media img {
     width: 50%;
     height: 400px;
-    border-radius: 35px;
+    border-radius: 10px;
     margin-bottom: 10px;
     transition: transform 0.3s ease;
 }
 
 .movie-stats {
-    width: 40%; 
+    width: 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -97,13 +100,14 @@
     }
 
     .movie-media img {
-        width: 70%; 
+        width: 70%;
     }
 
     .movie-stats {
-        width: 100%; 
-        align-items: center; 
+        width: 100%;
+        align-items: center;
     }
+
     .movie-details {
         padding: 10px;
     }
@@ -119,5 +123,3 @@
     }
 
 }
-
-

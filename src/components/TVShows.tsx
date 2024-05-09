@@ -21,7 +21,7 @@ const TVShows = () => {
       try {
         const showData = await fetchTVshows();
         setTVShow(showData)
-        console.log(showData)
+        //console.log(showData)
         localStorage.setItem('topTenShows', JSON.stringify(showData))
         setFromSearch(false); // I could use global variable here also but I wanted to show this way
       } catch (error) {

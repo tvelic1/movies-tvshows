@@ -13,10 +13,12 @@ function TVshowdetails() {
   const { selectedShow } = ShowStore();
   const { genres, setGenres } = useGenreStore();
   const navigate = useNavigate();
+
   const getGenreNames = (genre_ids: number[] = []): string[] => {
     return genre_ids.map(id => genres.find(genres => genres.id === id)?.name || "");
   };
   const [error, setError] = useState(false);
+  const [doesVideoExist, setDoesVideoExist] = useState(false);
   const { id } = useParams<{ id: string }>();
   const [key, setKey] = useState<string>();
 
@@ -26,13 +28,20 @@ function TVshowdetails() {
       try {
         if (id) {
 
-          const movieData = await fetchSearchVideo(id);
-          setKey(movieData)
+          setDoesVideoExist(false);
+          const movieData = await fetchSearchVideo('tv',id);
+          movieData.map((item: { type: string; key:string })=>{if(item.type==='Trailer')
+            setKey(item.key);
+          setDoesVideoExist(true); 
+          })
+
+          
+
         }
         // I could use global variable here also but I wanted to show this way
       } catch (error) {
 
-        console.error('Failed to fetch movie:', error);
+        console.error('Failed to fetch video key:', error);
         setError(true);
       }
 
@@ -47,7 +56,7 @@ function TVshowdetails() {
       }
 
     };
-    
+
     fetchData();
 
   }, [id, setGenres]);
@@ -62,8 +71,10 @@ function TVshowdetails() {
 
           <h1 style={{ textAlign: 'center' }}>{selectedShow?.name}</h1>
           <div className="show-info">
-            <VideoPlayer videoKey={key || ''}></VideoPlayer>
-            <p style={{marginTop:'10px'}}><strong>Overview:</strong> {selectedShow?.overview}</p>
+            {doesVideoExist ? <VideoPlayer videoKey={key || ''}></VideoPlayer> :
+             <img src={`https://image.tmdb.org/t/p/w500${selectedShow?.poster_path}`} alt={selectedShow?.name} />
+            }
+            <p style={{ marginTop: '10px' }}><strong>Overview:</strong> {selectedShow?.overview}</p>
             <p><strong>Genres:</strong> {getGenreNames(selectedShow?.genre_ids).join(', ')}</p>
             <p><strong>Rating:</strong> {selectedShow?.vote_average} / 10</p>
           </div>

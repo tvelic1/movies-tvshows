@@ -94,7 +94,7 @@ const MovieComponent = () => {
         <div
           key={index}
           className={`movie-card ${movie.vote_average > 8 ? 'recommended' : ''}`}
-          onClick={() => { setSelectedMovie(movie); navigate('/details') }}>
+          onClick={() => { setSelectedMovie(movie); navigate(`/movies/${movie.id}`) }}>
             
           <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt={movie.title} />
           <h2 style={{ textAlign: 'center' }} title={movie.title}>{movie.title}</h2>

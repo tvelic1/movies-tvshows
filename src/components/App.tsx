@@ -22,9 +22,8 @@ function App() {
         </nav>
 
         <Routes>
-          <Route path="/home" element={<Home />} />
           <Route path="/" element={<TVShows />} />
-          <Route path="/details" element={<MovieDetails />} />
+          <Route path="/movies/:id" element={<MovieDetails />} />
           <Route path="/movies" element={<MovieComponent />} />
           <Route path="/tvshows/:id" element={<TVshowdetails />} />
 

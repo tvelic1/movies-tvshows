@@ -1,14 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../css/MovieDetails.css';
 import MovieStore from '../globalVariables/MovieStore';
 import { useGenreStore } from '../globalVariables/useGenreStore';
-import { fetchGenres } from '../fetchData/api';
-import { useNavigate } from 'react-router-dom';
+import { fetchGenres, fetchSearchVideo} from '../fetchData/api';
+import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
+import VideoPlayer from './VideoPlayer';
 
 
 function MovieDetails() {
+  const [error, setError] = useState(false);
+  const [doesVideoExist, setDoesVideoExist] = useState(false);
+  const { id } = useParams<{ id: string }>();
+  const [key, setKey] = useState<string>();
   const { selectedMovie } = MovieStore();
   const { genres, setGenres } = useGenreStore();
   const navigate = useNavigate();
@@ -28,7 +33,30 @@ function MovieDetails() {
         setGenres(genreData)
       } catch (error) {
         console.error('Failed to fetch movie:', error);
+        setError(true);
       }
+
+      try {
+        if (id) {
+
+          setDoesVideoExist(false);
+          const movieData = await fetchSearchVideo('movie',id);
+          movieData.map((item: { type: any; key:any })=>{if(item.type==='Trailer' && item.key)
+            setKey(item.key);
+          setDoesVideoExist(true); 
+          })
+
+          console.log(key)
+
+        }
+      } catch (error) {
+
+        console.error('Failed to fetch video key:', error);
+        setError(true);
+      }
+
+
+
     }
     fetchData();
   }, [setGenres])
@@ -47,11 +75,17 @@ function MovieDetails() {
       <h1 style={{ textAlign: 'center' }}>{selectedMovie.title}</h1>
       <div className="movie-info">
         <div className="movie-media">
-          <img src={`https://image.tmdb.org/t/p/w500${selectedMovie.poster_path}`} alt={selectedMovie.title} />
+        {doesVideoExist ? <VideoPlayer videoKey={key || ''}></VideoPlayer> :
+             <img src={`https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`} alt={selectedMovie?.title} />
+            }
           <div className="movie-stats">
             <p><strong>Vote Count:</strong> {selectedMovie.vote_count}</p>
             <p><strong>Popularity:</strong> {selectedMovie.popularity}</p>
             <p><strong>Release Date:</strong> {fixDate(selectedMovie.release_date)}</p>
+            <p><strong>Actors:</strong> ...</p>
+            <p><strong>Other potential info:</strong> ...</p>
+
+
           </div>
         </div>
         <p><strong>Overview:</strong> {selectedMovie.overview}</p>
