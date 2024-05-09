@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import { TVShowDetails } from '../interfaces/TVShowInterface';
+import { TVShowDetails } from '../interfacess/TVShowInterface';
  
   interface IShowStore {
     selectedShow: TVShowDetails | null;

@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import { MovieDetails } from '../interfaces/MovieInterface';
+import { MovieDetails } from '../interfacess/MovieInterface';
  
   interface IMovieStore {
     selectedMovie: MovieDetails | null;

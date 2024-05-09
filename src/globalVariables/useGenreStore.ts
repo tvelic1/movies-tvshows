@@ -1,5 +1,5 @@
 import {create} from 'zustand';
-import { GenreDetails,GenreState } from '../interfaces/GenreInterface';
+import { GenreDetails,GenreState } from '../interfacess/GenreInterface';
 
 export const useGenreStore = create<GenreState>((set) => ({
   genres: [],

@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import '../css/MovieTVShowFeed.css';
 import useStore from '../globalVariables/useStore';
 import ShowStore from '../globalVariables/ShowStore';
-import { ITVShow } from '../interfaces/TVShowInterface';
+import { ITVShow } from '../interfacess/TVShowInterface';
 
 
 const TVShows = () => {
