@@ -6,11 +6,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import VideoPlayer from "./VideoPlayer";
 import { IVideoResponse } from "../interfaces/VideoInterface";
-import { MovieOrTVShow } from "../fetchData/api";
+import { IMediaDetails } from "../interfaces/MediaInterface";
 
 function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
-
-  const [selectedMedia, setSelectedMedia] = useState <MovieOrTVShow> (null);
+  const [selectedMedia, setSelectedMedia] = useState<IMediaDetails | null>(
+    null
+  );
   const [key, setKey] = useState<string>("");
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
@@ -25,16 +26,14 @@ function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
     const fetchData = async () => {
       setIsLoading(true);
       try {
-        const mediaById = await fetchFindById(type, id)
-        if(mediaById){
-            setSelectedMedia(mediaById);
-            console.log(selectedMedia)
-
+        const mediaById = await fetchFindById(type, id);
+        if (mediaById) {
+          setSelectedMedia(mediaById);
         }
 
         const data = await fetchSearchVideo(type, id);
         if (data) {
-          data.forEach((item: IVideoResponse ) => {
+          data.forEach((item: IVideoResponse) => {
             if (item.type === "Trailer" && item.key) {
               setKey(item.key);
             }
@@ -57,20 +56,21 @@ function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
 
   return (
     <div className="movie-details">
+      <button
+        className="back-button"
+        onClick={() => navigate(type === "movie" ? "/movie" : "/")}
+      >
+        <FontAwesomeIcon icon={faArrowLeft} />
+      </button>
+
       {!selectedMedia ? (
         <h2>
           There is no {type === "movie" ? "movie" : "TV show"} with this ID
         </h2>
       ) : (
         <>
-          <button
-            className="back-button"
-            onClick={() => navigate(type === "movie" ? "/movie" : "/")}
-          >
-            <FontAwesomeIcon icon={faArrowLeft} />
-          </button>
           <h1 style={{ textAlign: "center" }}>
-          {selectedMedia?.title || selectedMedia?.name}
+            {selectedMedia?.title || selectedMedia?.name}
           </h1>
           <div className="movie-info">
             <div className="movie-media">
@@ -89,11 +89,13 @@ function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
                 <p>
                   <strong>Popularity:</strong> {selectedMedia?.popularity}
                 </p>
-                  <p>
-                    <strong>Release Date:</strong>{" "}
-                    {fixDate(selectedMedia.release_date || selectedMedia.first_air_date)}
-                  </p>
-                
+                <p>
+                  <strong>Release Date:</strong>{" "}
+                  {fixDate(
+                    selectedMedia.release_date || selectedMedia.first_air_date
+                  )}
+                </p>
+
                 <p>
                   <strong>Status:</strong> {selectedMedia?.status}
                 </p>

@@ -1,10 +1,6 @@
 import axios from "axios";
-import { IMovie, MovieDetails } from "../interfaces/MovieInterface";
-import { ITVShow, TVShowDetails } from "../interfaces/TVShowInterface";
 import { IVideoResponse } from "../interfaces/VideoInterface";
-
-export type SequenceOfMoviesOrTVShows = IMovie | ITVShow | null | undefined;
-export type MovieOrTVShow=MovieDetails | TVShowDetails | null | undefined;
+import { IMedia, IMediaDetails } from "../interfaces/MediaInterface";
 
 
 const api = axios.create({
@@ -16,7 +12,7 @@ const api = axios.create({
 
 export const fetchMoviesOrTvshows = async (
   type: "movie" | "tv"
-): Promise<SequenceOfMoviesOrTVShows> => {
+): Promise<IMedia | null> => {
   try {
     const response = await api.get(`/${type}/top_rated?language=en-US&page=1`);
     return response.data;
@@ -29,7 +25,7 @@ export const fetchMoviesOrTvshows = async (
 export const fetchSearch = async (
   name: string,
   type: "movie" | "tv"
-): Promise<SequenceOfMoviesOrTVShows> => {
+): Promise<IMedia | null> => {
   try {
     const response = await api.get(
       `/search/${type}?query=${name}&include_adult=false&language=en-US&page=1`
@@ -43,11 +39,11 @@ export const fetchSearch = async (
 };
 
 export const fetchSearchVideo = async (
-  name: string,
+  type: "movie" | "tv",
   id: string
 ): Promise<IVideoResponse[] | null> => {
   try {
-    const response = await api.get(`/${name}/${id}/videos?language=en-US`);
+    const response = await api.get(`/${type}/${id}/videos?language=en-US`);
     if (response) return response?.data?.results;
     return null;
   } catch (error) {
@@ -57,11 +53,11 @@ export const fetchSearchVideo = async (
 };
 
 export const fetchFindById = async (
-  name: string,
+  type: "movie" | "tv",
   id: string
-): Promise<MovieOrTVShow> => {
+): Promise<IMediaDetails | null> => {
   try {
-    const response = await api.get(`/${name}/${id}?language=en-US`);
+    const response = await api.get(`/${type}/${id}?language=en-US`);
     if (response) return response.data;
     return null;
   } catch (error) {

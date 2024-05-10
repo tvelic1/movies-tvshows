@@ -8,8 +8,6 @@ export interface TVShowDetails {
     vote_average: number;
     vote_count:number;
     popularity:number;
-    release_date:string;
-    title:string;
     genres:GenreDetails[];
     status:string;
     first_air_date:string;

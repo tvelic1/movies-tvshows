@@ -9,10 +9,8 @@ export interface MovieDetails {
     vote_count:number;
     popularity:number;
     release_date:string;
-    name:string;
     genres:GenreDetails[]
     status:string;
-    first_air_date:string;
   }
   
   export interface IMovie {

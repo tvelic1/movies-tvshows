@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import "../css/MovieTVShowFeed.css";
 import useStore from "../globalVariables/SearchStore";
 import { fetchMoviesOrTvshows, fetchSearch } from "../fetchData/api";
-import { SequenceOfMoviesOrTVShows } from "../fetchData/api";
+import { IMedia } from "../interfaces/MediaInterface";
 const MediaFeed = ({
   type,
   placeholder,
@@ -14,7 +14,7 @@ const MediaFeed = ({
   title: string;
 }) => {
   const navigate = useNavigate();
-  const [media, setMedia] = useState<SequenceOfMoviesOrTVShows>(null);
+  const [media, setMedia] = useState<IMedia | null>(null);
   const { moviesOrShowsFromSearch, setFromSearch, search, setSearch } = useStore();
 
   const prevSearchRef = useRef(search);
