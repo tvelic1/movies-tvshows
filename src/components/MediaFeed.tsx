@@ -24,22 +24,24 @@ const MediaFeed = ({
 
       if (search.length < 3) {
 
-        const storedData = localStorage.getItem(`topTen-${type}`);
-
+       /* const storedData = localStorage.getItem(`topTen-${type}`);
         if (storedData) {
           setMedia(JSON.parse(storedData));
           setFromSearch(false);
           return;
-        }
+        }*/
+
         try {
           const data = await fetchMoviesOrTvshows(type);
           setMedia(data);
-          localStorage.setItem(`topTen-${type}`, JSON.stringify(data));
+          //localStorage.setItem(`topTen-${type}`, JSON.stringify(data));
           setFromSearch(false);
         } catch (error) {
           console.error(`Failed to fetch ${type}:`, error);
         }
-      } else {
+      } 
+      
+      else {
         try {
           const searchData = await fetchSearch(search, type);
           setMedia(searchData);
@@ -49,7 +51,10 @@ const MediaFeed = ({
         }
       }
     };
-      //we need to load data 1 second after last letter was typed, but page is loaded instantly on tab switching if there was no changes in input
+      /*we need to load data 1 second after last letter was typed, but page is loaded instantly on tab switching
+       so basically we are waiting 1 second for some search in one tab, but same search on other tab is automatic
+       if that is unnecessary just delete useRef logic*/
+      
     if (prevSearchRef.current === search) {
       fetchData();
     } else {
@@ -74,7 +79,7 @@ const MediaFeed = ({
           media.results
             .filter((item) => item.poster_path)
             .sort((a, b) => b.vote_average - a.vote_average)
-            .slice(0, moviesOrShowsFromSearch ? undefined : 10)
+            .slice(0, moviesOrShowsFromSearch ? media.results.length : 10)
             .map((item, index) => (
               <div
                 key={index}

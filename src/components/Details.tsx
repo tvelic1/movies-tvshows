@@ -7,7 +7,9 @@ import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
 import VideoPlayer from "./VideoPlayer";
 import { IVideoResponse } from "../interfaces/VideoInterface";
 import { MovieOrTVShow } from "../fetchData/api";
+
 function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
+
   const [selectedMedia, setSelectedMedia] = useState <MovieOrTVShow> (null);
   const [key, setKey] = useState<string>("");
   const navigate = useNavigate();
@@ -26,6 +28,8 @@ function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
         const mediaById = await fetchFindById(type, id)
         if(mediaById){
             setSelectedMedia(mediaById);
+            console.log(selectedMedia)
+
         }
 
         const data = await fetchSearchVideo(type, id);
@@ -66,7 +70,7 @@ function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
             <FontAwesomeIcon icon={faArrowLeft} />
           </button>
           <h1 style={{ textAlign: "center" }}>
-            {type === "movie" ? selectedMedia?.title : selectedMedia?.name}
+          {selectedMedia?.title || selectedMedia?.name}
           </h1>
           <div className="movie-info">
             <div className="movie-media">
@@ -85,17 +89,13 @@ function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
                 <p>
                   <strong>Popularity:</strong> {selectedMedia?.popularity}
                 </p>
-                {type === "movie" && (
                   <p>
                     <strong>Release Date:</strong>{" "}
-                    {fixDate(selectedMedia?.release_date || "")}
+                    {fixDate(selectedMedia.release_date || selectedMedia.first_air_date)}
                   </p>
-                )}
+                
                 <p>
-                  <strong>Actors:</strong> ...
-                </p>
-                <p>
-                  <strong>Other potential info:</strong> ...
+                  <strong>Status:</strong> {selectedMedia?.status}
                 </p>
               </div>
             </div>

@@ -7,7 +7,6 @@ export type SequenceOfMoviesOrTVShows = IMovie | ITVShow | null | undefined;
 export type MovieOrTVShow=MovieDetails | TVShowDetails | null | undefined;
 
 
-
 const api = axios.create({
   baseURL: "https://api.themoviedb.org/3",
   params: {
