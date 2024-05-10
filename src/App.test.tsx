@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { BrowserRouter } from 'react-router-dom';
 import Details from './components/Details';
 
@@ -34,5 +34,17 @@ describe('Details Component TV show not found', () => {
       expect(notFoundMessage).toBeInTheDocument();
     });
   });
-  
 
+  describe('Loading', () => {
+    test('showing loading after fetching data', async () => {
+      render(
+        <BrowserRouter>
+          <Details id="123" type="movie" />
+        </BrowserRouter>
+      );
+  
+      expect(screen.getByText(/loading.../i)).toBeInTheDocument();
+  
+    });
+  
+  });

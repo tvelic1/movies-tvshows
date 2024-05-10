@@ -11,22 +11,38 @@
     padding: 10px;
     margin: 0 auto;
     display: block;
-    border: 2px solid #ccc;
+    border: 2px solid #181111;
     border-radius: 9px;
     font-size: 16px;
     transition: border-color 0.1s, box-shadow 0.5s;
     border-color: #000000;
+    transform: translateY(12px);
+    background-color: #c2e3f6;
+    color: black;
+
 }
 
 #inputSearch:focus {
     outline: none;
     border-color: #77acd7;
     box-shadow: 0 0 10px #9ecaed;
+    animation: pulse 2s infinite;
 }
 
+@keyframes pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgba(158, 202, 237, 0.7);
+    }
+    70% {
+      box-shadow: 0 0 0 3px rgba(158, 202, 237, 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgba(158, 202, 237, 0);
+    }
+  }
 
 .movie-card.recommended {
-    border: 1.7px solid #79e74d;
+    border: 1.9px solid #79e74d;
     /* green means that it is recomended - rating>8 */
     box-shadow: 1px 3px 7px rgba(76, 175, 80, 0.6);
 }
@@ -41,7 +57,7 @@
     padding: 15px;
     border-radius: 10px;
     overflow: hidden;
-    background-color: rgb(101, 120, 225);
+    background-color: rgb(63, 87, 222);
     cursor: pointer;
     transition: transform 0.3s ease;
 
@@ -59,7 +75,7 @@
 }
 
 .movie-card:hover img {
-    transform: scale(1.04);
+    transform: scale(1.07);
 }
 
 .movie-card img {

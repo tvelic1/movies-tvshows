@@ -53,11 +53,12 @@ const MediaFeed = ({
     };
       /*we need to load data 1 second after last letter was typed, but page is loaded instantly on tab switching
        so basically we are waiting 1 second for some search in one tab, but same search on other tab is automatic
-       if that is unnecessary just delete useRef logic*/
+       if that is unnecessary it is easy to delete useRef logic*/
       
     if (prevSearchRef.current === search) {
       fetchData();
-    } else {
+    }
+     else {
       const timeoutId = setTimeout(fetchData, 1000);
       return () => clearTimeout(timeoutId);
     }

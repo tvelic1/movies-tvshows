@@ -1,6 +1,6 @@
 import React from 'react';
 import {useParams } from 'react-router-dom';
-import '../css/MovieDetails.css';
+import '../css/MediaDetails.css';
 import Details from './Details';
 
 function TVshowdetails() {

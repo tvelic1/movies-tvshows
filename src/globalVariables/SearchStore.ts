@@ -15,7 +15,7 @@ const useStore = create<StoreState>((set) => {
       set({ search: newSearch });
       localStorage.setItem('search', newSearch);
     }, 
-    moviesOrShowsFromSearch: false,
+    moviesOrShowsFromSearch: true,
     setFromSearch: (fromSearch: boolean) => set({ moviesOrShowsFromSearch: fromSearch }),
   };
 });

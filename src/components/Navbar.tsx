@@ -26,7 +26,7 @@ function Navbar() {
                   style={({ isActive }) =>
                     isActive
                       ? { color: "white", boxShadow: "inset 0 0 10px #000000" }
-                      : { color: "black" }
+                      : { color: "black", fontWeight:'bold' }
                   }
                 >
                   Movies
@@ -41,7 +41,7 @@ function Navbar() {
                 style={({ isActive }) =>
                   isActive
                     ? { color: "white", boxShadow: "inset 0 0 10px #000000" }
-                    : { color: "black" }
+                    : { color: "black" , fontWeight:'bold' }
                 }
               >
                 TV Shows
