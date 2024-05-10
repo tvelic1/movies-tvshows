@@ -1,56 +1,34 @@
-import React from 'react';
-import useStore from '../globalVariables/useStore';
+import React from "react";
 import {
   BrowserRouter as Router,
   Routes,
   Route,
-  useNavigate
-} from 'react-router-dom';
-import '../css/App.css';
-import MovieComponent from './MovieComponent';
-import MovieDetails from './MovieDetails';
-import TVShows from './TVShows';
-import TVshowdetails from './TVshowdetails';
-import Navbar from './Navbar';
+} from "react-router-dom";
+import "../css/App.css";
+import MovieComponent from "./MovieComponent";
+import MovieDetails from "./MovieDetails";
+import TVShows from "./TVShowsComponent";
+import TVshowdetails from "./TVshowdetails";
+import Navbar from "./Navbar";
 
 function App() {
   return (
     <Router>
       <div>
+
         <nav>
           <Navbar />
         </nav>
 
         <Routes>
           <Route path="/" element={<TVShows />} />
-          <Route path="/movies/:id" element={<MovieDetails />} />
-          <Route path="/movies" element={<MovieComponent />} />
-          <Route path="/tvshows/:id" element={<TVshowdetails />} />
-
-
-
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/movie" element={<MovieComponent />} />
+          <Route path="/tv/:id" element={<TVshowdetails />} />
         </Routes>
+
       </div>
     </Router>
-  );
-}
-
-function Home() {
-  const navigate = useNavigate();
-  const { search, setSearch } = useStore();
-
-
-  return (
-    <div>
-      <h1>Welcome to the Home Page</h1>
-      <button onClick={() => navigate('/')}>Click</button>
-      <input
-        type="text"
-        placeholder="Search movies..."
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-      />
-    </div>
   );
 }
 

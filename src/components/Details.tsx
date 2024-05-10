@@ -1,102 +1,121 @@
-import React, { useEffect, useState } from 'react'
-import '../css/MovieDetails.css';
-import MovieStore from '../globalVariables/MovieStore';
-import { useGenreStore } from '../globalVariables/useGenreStore';
-import { fetchFindById, fetchGenres, fetchSearchVideo } from '../fetchData/api';
-import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
-import VideoPlayer from './VideoPlayer';
-import { MovieDetails } from '../interfaces/MovieInterface';
-import ShowStore from '../globalVariables/ShowStore';
-import { TVShowDetails } from '../interfaces/TVShowInterface';
+import React, { useEffect, useState } from "react";
+import "../css/MovieDetails.css";
+import { fetchFindById, fetchSearchVideo } from "../fetchData/api";
+import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import VideoPlayer from "./VideoPlayer";
+import { IVideoResponse } from "../interfaces/VideoInterface";
+import { MovieOrTVShow } from "../fetchData/api";
+function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
+  const [selectedMedia, setSelectedMedia] = useState <MovieOrTVShow> (null);
+  const [key, setKey] = useState<string>("");
+  const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(true);
 
+  const fixDate = (date: string) => {
+    const parts = date.split("-");
+    const reversedParts = parts.reverse();
+    return reversedParts.join(".");
+  };
 
-
-function Details({ id, type }: { id: string, type: 'tv' | 'movie' }) {
-    const [selectedMovie, setSelectedMovie] = useState<MovieDetails | TVShowDetails | null>(null);
-    const [key, setKey] = useState<string>('');
-    const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true); // Dodano novo stanje za praćenje učitavanja
-
-    const fixDate = (date: string) => {
-        const parts = date.split('-');
-        const reversedParts = parts.reverse();
-        return reversedParts.join('.');
-    }
-
-
-    useEffect(() => {
-
-        const fetchData = async () => {
-            setIsLoading(true);
-            try { 
-                await fetchFindById(type, id).then(res => { console.log(res); setSelectedMovie(res) }).catch(e=>console.log(e));
-
-                    const movieData = await fetchSearchVideo(type, id);
-                    if (movieData) {
-                        movieData.forEach((item: { type: string; key: string }) => {
-                            if (item.type === 'Trailer' && item.key) {
-                                setKey(item.key);
-                            }
-                        });
-                    }
-                    else{
-                        setKey('');
-                    }
-
-                
-            } catch (error) {
-
-                console.error('Failed to fetch video key:', error);
-            } finally{
-                setIsLoading(false);
-            }
-
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const mediaById = await fetchFindById(type, id)
+        if(mediaById){
+            setSelectedMedia(mediaById);
         }
-        fetchData();
-    }, [id, type])
-    
-     if(isLoading){
-        return <h2 style={{textAlign:'center'}}>Loading...</h2>; 
-     }
 
+        const data = await fetchSearchVideo(type, id);
+        if (data) {
+          data.forEach((item: IVideoResponse ) => {
+            if (item.type === "Trailer" && item.key) {
+              setKey(item.key);
+            }
+          });
+        } else {
+          setKey("");
+        }
+      } catch (error) {
+        console.error("Failed to fetch video key:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, [id, type]);
 
+  if (isLoading) {
+    return <h2 style={{ textAlign: "center" }}>Loading...</h2>;
+  }
 
-    return (
-        <div className="movie-details">
-            {!selectedMovie ? (<h2>There is no {type === 'movie' ? 'movie' : 'TV show'} with this ID</h2>)
-                :
-                <>
-                    <button className="back-button" onClick={() => navigate(type === 'movie' ? '/movies' : '/')}>
-                        <FontAwesomeIcon icon={faArrowLeft} />
-                    </button>
-                    <h1 style={{ textAlign: 'center' }}>{type === 'movie' ? selectedMovie?.title : selectedMovie?.name}</h1>
-                    <div className="movie-info">
-                        <div className="movie-media">
-                            {key ? <VideoPlayer videoKey={key || ''}></VideoPlayer> :
-                                <img src={`https://image.tmdb.org/t/p/w500${selectedMovie?.poster_path}`} alt='' />
-                            }
-                            <div className="movie-stats">
-                                <p><strong>Vote Count:</strong> {selectedMovie?.vote_count}</p>
-                                <p><strong>Popularity:</strong> {selectedMovie?.popularity}</p>
-                                {type === 'movie' && <p><strong>Release Date:</strong> {fixDate(selectedMovie?.release_date || '')}</p>}
-                                <p><strong>Actors:</strong> ...</p>
-                                <p><strong>Other potential info:</strong> ...</p>
-
-
-                            </div>
-                        </div>
-                        <p><strong>Overview:</strong> {selectedMovie?.overview}</p>
-                        <div className="genres-rating-container">
-                            <p className="genres">
-                                <strong>Genres:</strong> {selectedMovie?.genres.map(genre => genre.name).join(', ')}
-                            </p>
-                            <p className="rating"><strong>Rating:</strong> {selectedMovie?.vote_average} / 10</p>
-                        </div>
-                    </div></>}
-        </div>
-    )
-};
+  return (
+    <div className="movie-details">
+      {!selectedMedia ? (
+        <h2>
+          There is no {type === "movie" ? "movie" : "TV show"} with this ID
+        </h2>
+      ) : (
+        <>
+          <button
+            className="back-button"
+            onClick={() => navigate(type === "movie" ? "/movie" : "/")}
+          >
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </button>
+          <h1 style={{ textAlign: "center" }}>
+            {type === "movie" ? selectedMedia?.title : selectedMedia?.name}
+          </h1>
+          <div className="movie-info">
+            <div className="movie-media">
+              {key ? (
+                <VideoPlayer videoKey={key || ""}></VideoPlayer>
+              ) : (
+                <img
+                  src={`https://image.tmdb.org/t/p/w500${selectedMedia?.poster_path}`}
+                  alt=""
+                />
+              )}
+              <div className="movie-stats">
+                <p>
+                  <strong>Vote Count:</strong> {selectedMedia?.vote_count}
+                </p>
+                <p>
+                  <strong>Popularity:</strong> {selectedMedia?.popularity}
+                </p>
+                {type === "movie" && (
+                  <p>
+                    <strong>Release Date:</strong>{" "}
+                    {fixDate(selectedMedia?.release_date || "")}
+                  </p>
+                )}
+                <p>
+                  <strong>Actors:</strong> ...
+                </p>
+                <p>
+                  <strong>Other potential info:</strong> ...
+                </p>
+              </div>
+            </div>
+            <p>
+              <strong>Overview:</strong> {selectedMedia?.overview}
+            </p>
+            <div className="genres-rating-container">
+              <p className="genres">
+                <strong>Genres:</strong>{" "}
+                {selectedMedia?.genres.map((genre) => genre.name).join(", ")}
+              </p>
+              <p className="rating">
+                <strong>Rating:</strong> {selectedMedia?.vote_average} / 10
+              </p>
+            </div>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
 
 export default Details;

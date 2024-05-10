@@ -1,8 +1,6 @@
-
 import { useParams } from 'react-router-dom';
-
 import Details from './Details';
-
+import React from 'react';
 
 function MovieDetails() {
  

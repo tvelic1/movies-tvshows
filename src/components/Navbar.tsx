@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import "../css/Navbar.css";
-import { NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
-  
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
@@ -18,37 +17,37 @@ function Navbar() {
             <i className={click ? "fas fa-times" : "fas fa-bars"} />
           </div>
           <ul className={click ? "nav-menu active" : "nav-menu"}>
-
             {
               <li className="nav-item">
-              <NavLink
-                to="/movies"
-                className="nav-links"
-                onClick={closeMobileMenu}
-                style={({ isActive }) =>
-                  isActive ? { color: 'white', boxShadow: 'inset 0 0 10px #000000' } : { color: 'black' }
-                }
-              >
-                Movies
-              </NavLink>
-            </li>
+                <NavLink
+                  to="/movie"
+                  className="nav-links"
+                  onClick={closeMobileMenu}
+                  style={({ isActive }) =>
+                    isActive
+                      ? { color: "white", boxShadow: "inset 0 0 10px #000000" }
+                      : { color: "black" }
+                  }
+                >
+                  Movies
+                </NavLink>
+              </li>
             }
-          <li className="nav-item">
+            <li className="nav-item">
               <NavLink
                 to="/"
                 className="nav-links"
                 onClick={closeMobileMenu}
                 style={({ isActive }) =>
-                  isActive ? { color: 'white', boxShadow: 'inset 0 0 10px #000000' } : { color: 'black' }
+                  isActive
+                    ? { color: "white", boxShadow: "inset 0 0 10px #000000" }
+                    : { color: "black" }
                 }
               >
                 TV Shows
               </NavLink>
             </li>
-
-
           </ul>
-
         </div>
       </nav>
     </>

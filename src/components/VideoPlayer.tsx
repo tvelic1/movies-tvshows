@@ -1,8 +1,5 @@
 import React from 'react';
-
-interface IVideoProps {
-  videoKey: string;
-}
+import { IVideoProps } from '../interfaces/VideoInterface';
 
 
 const VideoPlayer: React.FC<IVideoProps> = ({ videoKey}) => {
@@ -11,7 +8,6 @@ const VideoPlayer: React.FC<IVideoProps> = ({ videoKey}) => {
   return (
     <iframe
       title="Video Player" 
-
       width="560"
       height="315"
       src={videoUrl}

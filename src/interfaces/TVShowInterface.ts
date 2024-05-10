@@ -14,8 +14,6 @@ export interface TVShowDetails {
     genres:GenreDetails[]
   }
   
-  
-  
   export interface ITVShow {
     results: TVShowDetails[];
   }
