@@ -20,7 +20,7 @@ describe('MediaFeed Component for movies', () => {
         title: 'Movie 2',
         poster_path: '/poster1.jpg',
         vote_average: 8.5,
-        status:'relased',
+        status:'released',
         overview:'overview...'
       },
       {
@@ -57,7 +57,7 @@ describe('MediaFeed Component for movies', () => {
   });
 
 
-  test('Title and placeholder', async () => {
+  test('Title and placeholder for movies', async () => {
     render(
       <BrowserRouter>
         <MediaFeed type={mockType} placeholder={placeholder} title={title} />
@@ -85,10 +85,10 @@ describe('MediaFeed Component for shows', () => {
     results: [
       {
         id: '7',
-        title: 'tvshow 22',
+        name: 'tvshow 22',
         poster_path: '/poster21.jpg',
         vote_average: 6.5,
-        status:'returnig series',
+        status:'returning series',
         overview:'overview tvshow...'
       },
       {

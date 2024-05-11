@@ -54,7 +54,7 @@ describe('Details Component', () => {
     });
   });
 
-  test('renders loading state initially', () => {
+  test('renders loading state initially for movies', () => {
     render(
       <BrowserRouter>
         <Details id={mockId} type={mockType} />
@@ -107,7 +107,7 @@ describe('Details Component for TVShow', () => {
       });
     });
   
-    test('renders loading state initially', () => {
+    test('renders loading state initially for shows', () => {
       render(
         <BrowserRouter>
           <Details id={mockId} type={mockType} />

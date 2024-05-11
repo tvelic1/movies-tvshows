@@ -42,13 +42,13 @@
   }
 
 .movie-card.recommended {
-    border: 1.9px solid #79e74d;
+    border: 2px solid #79e74d;
     /* green means that it is recomended - rating>8 */
-    box-shadow: 1px 3px 7px rgba(76, 175, 80, 0.6);
+    box-shadow: 2px 4px 8px rgba(76, 175, 80, 0.6);
 }
 
 .movie-card.recommended:hover {
-    transform: scale(1.03);
+    transform: scale(1.04);
     box-shadow: 0 8px 16px rgba(122, 222, 126, 0.8);
 }
 
@@ -76,13 +76,14 @@
 
 .movie-card:hover img {
     transform: scale(1.07);
+    opacity:90%;
 }
 
 .movie-card img {
     width: 100%;
     height: 300px;
     border-radius: 8px;
-    transition: transform 1s ease-in-out;
+    transition: transform 1.5s ease-in-out;
 
 }
 
