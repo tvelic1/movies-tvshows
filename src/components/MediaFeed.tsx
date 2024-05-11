@@ -23,18 +23,9 @@ const MediaFeed = ({
     const fetchData = async () => {
 
       if (search.length < 3) {
-
-       /* const storedData = localStorage.getItem(`topTen-${type}`);
-        if (storedData) {
-          setMedia(JSON.parse(storedData));
-          setFromSearch(false);
-          return;
-        }*/
-
         try {
           const data = await fetchMoviesOrTvshows(type);
           setMedia(data);
-          //localStorage.setItem(`topTen-${type}`, JSON.stringify(data));
           setFromSearch(false);
         } catch (error) {
           console.error(`Failed to fetch ${type}:`, error);
@@ -85,13 +76,13 @@ const MediaFeed = ({
               <div
                 key={index}
                 className={`movie-card ${
-                  item.vote_average > 8 ? "recommended" : ""
+                  (item.vote_average >= 8 && item.vote_count>100) ? "recommended" : ""
                 }`}
                 onClick={() => navigate(`/${type}/${item.id}`)}
               >
                 <img
                   src={`https://image.tmdb.org/t/p/w500${item.poster_path}`}
-                  alt=""
+                  alt={item.name || item.title}
                 />
                 <h2 style={{ textAlign: "center" }}>
                   {item.title || item.name}
