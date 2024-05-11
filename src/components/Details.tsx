@@ -18,11 +18,14 @@ function Details({ id, type }: { id: string; type: "tv" | "movie" }) {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(true);
 
-  const fixDate = (date: string) => {
+    const fixDate = (date: string) => {
+    if(date && date.split('-')){
     const parts = date.split("-");
     const reversedParts = parts.reverse();
-    return reversedParts.join(".");
+    return reversedParts.join(".");}
+    return '';
   };
+
 
   useEffect(() => {
     const fetchData = async () => {
