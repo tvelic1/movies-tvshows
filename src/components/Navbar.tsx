@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import "../css/Navbar.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useMatch } from "react-router-dom";
 
 function Navbar() {
   const [click, setClick] = useState(false);
   const handleClick = () => setClick(!click);
   const closeMobileMenu = () => setClick(false);
+  const route=useMatch('/tv/:id')
 
   return (
     <>
@@ -39,7 +40,7 @@ function Navbar() {
                 className="nav-links"
                 onClick={closeMobileMenu}
                 style={({ isActive }) =>
-                  isActive
+                  isActive || route
                     ? { color: "white", boxShadow: "inset 0 0 10px #000000" }
                     : { color: "black" , fontWeight:'bold' }
                 }
