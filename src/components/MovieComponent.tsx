@@ -8,7 +8,7 @@ const MovieComponent = () => {
       <MediaFeed
         type="movie"
         placeholder="Search movies..."
-        title="TOP 10 Movies of all time"
+        title="TOP 10 rated MOVIES of all time"
       />
     </>
   );

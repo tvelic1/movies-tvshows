@@ -12,7 +12,7 @@ const api = axios.create({
 
 export const fetchMoviesOrTvshows = async (
   type: "movie" | "tv"
-): Promise<IMedia | null> => {
+): Promise<IMedia> => {
   try {
     const response = await api.get(`/${type}/top_rated?language=en-US&page=1`);
     return response.data;

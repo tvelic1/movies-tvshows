@@ -8,7 +8,7 @@ const TVShows = () => {
       <MediaFeed
         type="tv"
         placeholder="Search TV shows..."
-        title="TOP 10 TV Shows of all time"
+        title="TOP 10 rated TV SHOWS of all time"
       />
     </>
   );

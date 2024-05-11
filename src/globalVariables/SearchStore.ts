@@ -8,12 +8,12 @@ interface StoreState {
 }
 
 const useStore = create<StoreState>((set) => {
-  const initialSearch = localStorage.getItem('search') || '';
+  const initialSearch = sessionStorage.getItem('search') || '';
   return {
     search: initialSearch,
     setSearch: (newSearch: string) => {
       set({ search: newSearch });
-      localStorage.setItem('search', newSearch);
+      sessionStorage.setItem('search', newSearch);
     }, 
     moviesOrShowsFromSearch: true,
     setFromSearch: (fromSearch: boolean) => set({ moviesOrShowsFromSearch: fromSearch }),
